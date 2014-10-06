@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       ">
+
+    <context:property-placeholder  location="classpath:/default.properties" />
+    
+    	
+    <bean name="sqsClient" class="org.apache.camel.examples.sqsclient.MyAmazonSQSAsyncClient">
+    	
+		<constructor-arg value="https://sqs.ap-southeast-2.amazonaws.com/<<end point>>" />        
+		<constructor-arg>
+            <bean class="com.amazonaws.auth.BasicAWSCredentials">
+                <constructor-arg value="${access.key}"/>
+                <constructor-arg value="${secret.key}"/>
+            </bean>
+        </constructor-arg>
+
+    </bean>
+
+    
+	<bean id="sqsProdBeanProcessor" class="org.apache.camel.examples.builder.ProdBeanProcessor"/>
+	
+ 	<bean id="sqsConsBeanProcessor" class="org.apache.camel.examples.builder.ConsBeanProcessor"/>
+     
+	<!--bootstrap camel context-->
+    <camelContext id="sqsContext" xmlns="http://camel.apache.org/schema/spring">
+        <package>org.apache.camel.examples</package>
+		<endpoint uri="https://sqs.ap-southeast-2.amazonaws.com/<<end point>>" />
+    </camelContext>
+</beans>
