@@ -5,7 +5,7 @@ import com.amazonaws.services.sqs.AmazonSQSAsyncClient;
 
 public class MyAmazonSQSAsyncClient extends AmazonSQSAsyncClient{
 	
-	private String endpoint = "https://sqs.ap-southeast-2.amazonaws.com/750482588406";
+	private String endpoint = "https://sqs.ap-southeast-2.amazonaws.com/<<endpoint>>";
 	
 	MyAmazonSQSAsyncClient(){
 		super();

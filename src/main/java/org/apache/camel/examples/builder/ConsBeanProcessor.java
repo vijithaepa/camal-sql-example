@@ -1,7 +1,6 @@
 package org.apache.camel.examples.builder;
 
 import org.apache.camel.Exchange;
-import org.apache.camel.examples.model.Person;
 
 public class ConsBeanProcessor {
 
